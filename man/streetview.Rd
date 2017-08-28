@@ -9,5 +9,5 @@
 parks
 }
 \details{
-See the README on
+See Vignette
 }

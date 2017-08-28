@@ -9,7 +9,9 @@ get_parks(path.root = NULL, proj.name = NULL, fresh = FALSE)
 \arguments{
 \item{path.root}{location of current dropbox root Example: ~/Dropbox/pkg.data/}
 
-\item{proj.new}{New projection}
+\item{proj.name}{Projection to use for project default: denver}
+
+\item{fresh}{Redo import and clean raw shapes}
 }
 \description{
 load and cleans parks shapefiles

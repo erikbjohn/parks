@@ -2,7 +2,7 @@
 #'
 #' parks
 #'
-#' See the README on 
+#' See Vignette
 #'
 #' @docType package
 #' @name streetview
@@ -16,7 +16,8 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 #'
 #' @description load and cleans parks shapefiles
 #' @param path.root location of current dropbox root Example: ~/Dropbox/pkg.data/
-#' @param proj.new New projection
+#' @param proj.name Projection to use for project default: denver
+#' @param fresh Redo import and clean raw shapes
 #' @keywords parks denver load google panoids
 #' @export
 #' @importFrom pkg.data.paths paths
@@ -28,14 +29,14 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 #' @import methods.shapes
 #' @import utils
 get_parks <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
-  file.name <- file.body <- NULL
+  file.name <- NULL; file.body <- NULL
   # Initialize api and paths
   api.key <- api.keys::import.key(str.api.name = 'google')
   # Load package data from dropbox
   get.parks.path <- pkg.data.paths::paths(path.root = path.root, str.pkg.name = 'parks')
   check <- check_parks(path.root)
   if (!check$raw) stop(paste('parks shapefile parks_project not found in', get.parks.path$pkg.root[1], '/raw/'))
-  if (check$clean){
+  if (check$clean & !fresh){
     parks.path.clean <- get.parks.path[file.name == 'parks.rdata' & grepl('^clean', file.body, perl = TRUE)]
     load(parks.path.clean$sys.path)
   } else {
@@ -58,7 +59,7 @@ get_parks <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
 #' @importFrom pkg.data.paths paths
 #' @import utils
 check_parks <- function(path.root = NULL){
-  file.name <- file.body <- NULL
+  file.name <- NULL; file.body <- NULL
   check <- list()
   get.parks.path <- pkg.data.paths::paths(path.root = path.root, str.pkg.name = 'parks')
   check$raw <- nrow(get.parks.path[file.name == 'parks_project.shp' & grepl('^raw', file.body, perl = TRUE)])>0
