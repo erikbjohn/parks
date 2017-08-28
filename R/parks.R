@@ -12,7 +12,7 @@ NULL
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 
 
-#' @title get_parks
+#' @title parks_get
 #'
 #' @description load and cleans parks shapefiles
 #' @param path.root location of current dropbox root Example: ~/Dropbox/pkg.data/
@@ -28,13 +28,13 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 #' @importFrom rgdal readOGR
 #' @import methods.shapes
 #' @import utils
-get_parks <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
+parks_get <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
   file.name <- NULL; file.body <- NULL
   # Initialize api and paths
   api.key <- api.keys::import.key(str.api.name = 'google')
   # Load package data from dropbox
   get.parks.path <- pkg.data.paths::paths(path.root = path.root, str.pkg.name = 'parks')
-  check <- check_parks(path.root)
+  check <- parks_check(path.root)
   if (!check$raw) stop(paste('parks shapefile parks_project not found in', get.parks.path$pkg.root[1], '/raw/'))
   if (check$clean & !fresh){
     parks.path.clean <- get.parks.path[file.name == 'parks.rdata' & grepl('^clean', file.body, perl = TRUE)]
@@ -48,7 +48,7 @@ get_parks <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
   }
   return(parks)
 }
-#' @title check_parks
+#' @title parks_check
 #'
 #' @description checks parks for raw and clean shapes
 #' @param path.root location of current dropbox root Example: ~/Dropbox/pkg.data/
@@ -58,7 +58,7 @@ get_parks <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
 #' @importFrom data.table data.table rbindlist
 #' @importFrom pkg.data.paths paths
 #' @import utils
-check_parks <- function(path.root = NULL){
+parks_check <- function(path.root = NULL){
   file.name <- NULL; file.body <- NULL
   check <- list()
   get.parks.path <- pkg.data.paths::paths(path.root = path.root, str.pkg.name = 'parks')
