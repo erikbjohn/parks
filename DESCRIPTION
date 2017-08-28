@@ -15,7 +15,7 @@ Imports: api.keys,
   lubridate,
   methods.shapes,
   pkg.data.paths,
-  readOGR,
+  rgdal,
   stringr,
   utils
 RoxygenNote: 6.0.1.9000

@@ -28,6 +28,7 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 #' @import methods.shapes
 #' @import utils
 get_parks <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
+  file.name <- file.body <- NULL
   # Initialize api and paths
   api.key <- api.keys::import.key(str.api.name = 'google')
   # Load package data from dropbox
@@ -57,6 +58,7 @@ get_parks <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
 #' @importFrom pkg.data.paths paths
 #' @import utils
 check_parks <- function(path.root = NULL){
+  file.name <- file.body <- NULL
   check <- list()
   get.parks.path <- pkg.data.paths::paths(path.root = path.root, str.pkg.name = 'parks')
   check$raw <- nrow(get.parks.path[file.name == 'parks_project.shp' & grepl('^raw', file.body, perl = TRUE)])>0
