@@ -1,5 +1,5 @@
 ---
-title: "streetview"
+title: "parks"
 author: "Erik Johnson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -9,39 +9,18 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette illustrates how to use the streetview functions
+# Imports and projects parks
 
-# get_panoids
-
-panoids retrieves streetview metadata for the nearest panorama to a given address. Metadata includes panoid, latitude, longitude and date. Each observation is the location where a google car took a picture. 
-
-For example, the address: 6975 E Sandown Rd, Denver, CO 80216
-
-Appends the following record to the panoids datatable: 
-
-
+## get_parks
 ```{r, eval=TRUE, size='tiny', echo=FALSE, warning=FALSE}
-library(data.table)
 library(knitr)
-dt <- data.table(address = '6975 E Sandown Rd, Denver, CO 80216',
-                 copyright = '© 2017 Google',
-                 date = '2016-09',
-                 location.lat = '39.7...',
-                 location.lng = '-104.9...',
-                 pano_id = 'LDQK5dSu5...',
-                 statius = 'OK'
-                 )
-kable(dt, table.attr = "style='width:100%;'")
+parks.shapes <- get_parks()
+plot(parks.shapes)
+table(parks.shapes@data$park_type)
+knitr::kable(parks.shapes@data[1:20,])
 ```
 
-# plot_panoids
 
-Example for yera
-```{r, eval=TRUE, cache=TRUE, fig.width=6, fig.height=6}
-library(streetview)
-l.plots <- streetview::plot_panoids(path.root = '~/Dropbox/pkg.data')
-l.plots$year
-```
 
 
 

@@ -11,9 +11,13 @@ vignette: >
 
 # Imports and projects parks
 
+## get_parks
 ```{r, eval=TRUE, size='tiny', echo=FALSE, warning=FALSE}
-parks.shapes <- parks::get_parks()
+library(knitr)
+parks.shapes <- get_parks()
 plot(parks.shapes)
+table(parks.shapes@data$park_type)
+knitr::kable(parks.shapes@data[1:20,])
 ```
 
 
