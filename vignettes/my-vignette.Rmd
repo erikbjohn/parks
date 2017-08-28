@@ -1,0 +1,22 @@
+---
+title: "parks"
+author: "Erik Johnson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Imports and projects parks
+
+```{r, eval=TRUE, size='tiny', echo=FALSE, warning=FALSE}
+parks.shapes <- parks::get_parks()
+plot(parks.shapes)
+```
+
+
+
+
+
