@@ -2,6 +2,7 @@
 
 export(parks_check)
 export(parks_get)
+import(methods)
 import(methods.shapes)
 import(utils)
 importFrom(api.keys,import.key)

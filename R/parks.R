@@ -44,9 +44,11 @@ parks_get <- function(path.root = NULL, proj.name = NULL, fresh=FALSE){
     parks.clean.path <- paste0(path.expand(get.parks.path$pkg.root[[1]]), '/clean/parks.rdata')
     parks <- methods.shapes::clean.shape(x = parks_raw, proj.env.name = proj.name)
     names(parks@data) <- stringr::str_to_lower(names(parks@data))
+    # Bring id into data
+    parks@data$park_id <- sapply(seq(1,length(parks@polygons)), function(x) slot(parks@polygons[[x]], 'ID'))
     parks <- save(parks, file=parks.clean.path)
   }
-  return(parks)
+   return(parks)
 }
 #' @title parks_check
 #'
